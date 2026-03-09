@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Portfolio Project",
+      "description": "A design project in the portfolio.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["Logo Design", "Branding", "UI/UX Design", "Social Media", "Video Graphics"] },
+        "description": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "tools": { "type": "array", "items": { "type": "string" } },
+        "process": { "type": "string" },
+        "impact": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "description", "images"]
+    },
+    "Booking": {
+      "title": "Meeting Booking",
+      "description": "A scheduled call or consultation.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientEmail": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "duration": { "type": "number" },
+        "type": { "type": "string", "enum": ["Consultation", "Project Kickoff", "Mentorship"] },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["clientName", "clientEmail", "date", "duration", "type"]
+    },
+    "ProjectRequest": {
+      "title": "Freelance Project Request",
+      "description": "A submission from a potential client.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "company": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "budget": { "type": "string" },
+        "deadline": { "type": "string" },
+        "description": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["new", "reviewed", "accepted", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "serviceType", "description"]
+    },
+    "Student": {
+      "title": "Student Profile",
+      "description": "A student mentored by Ritesh.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "photo": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "course": { "type": "string" },
+        "gradYear": { "type": "number" },
+        "socials": {
+          "type": "object",
+          "properties": {
+            "instagram": { "type": "string" },
+            "linkedin": { "type": "string" },
+            "behance": { "type": "string" },
+            "dribbble": { "type": "string" }
+          }
+        },
+        "portfolio": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["name", "course", "gradYear"]
+    },
+    "Placement": {
+      "title": "Student Placement",
+      "description": "Success story of a student.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentName": { "type": "string" },
+        "company": { "type": "string" },
+        "role": { "type": "string" },
+        "year": { "type": "number" },
+        "testimonial": { "type": "string" }
+      },
+      "required": ["studentName", "company", "role", "year"]
+    },
+    "Review": {
+      "title": "Review/Testimonial",
+      "description": "Feedback from a client or student.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "author": { "type": "string" },
+        "authorPhoto": { "type": "string" },
+        "type": { "type": "string", "enum": ["client", "student"] },
+        "content": { "type": "string" },
+        "rating": { "type": "number" },
+        "projectType": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["author", "type", "content", "rating"]
+    }
+  },
+  "firestore": {
+    "/projects": { "schema": "Project", "description": "Portfolio projects" },
+    "/bookings": { "schema": "Booking", "description": "Meeting bookings" },
+    "/projectRequests": { "schema": "ProjectRequest", "description": "Client project inquiries" },
+    "/students": { "schema": "Student", "description": "Student profiles" },
+    "/placements": { "schema": "Placement", "description": "Student placement success" },
+    "/reviews": { "schema": "Review", "description": "Client and student reviews" }
+  }
+}
